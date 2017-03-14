@@ -21,7 +21,7 @@ class SeleccionadoCVC: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -63,7 +63,7 @@ class SeleccionadoCVC: UICollectionViewController {
         cell.lblCosto.text = "$\(item.costo!)"
         
         
-        let swipeGR = UISwipeGestureRecognizer()
+        let swipeGR = UISwipeGestureRecognizer(target: self, action:#selector(swipe))
         swipeGR.direction = UISwipeGestureRecognizerDirection.left
         cell.addGestureRecognizer(swipeGR)
         
@@ -74,11 +74,20 @@ class SeleccionadoCVC: UICollectionViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         
         cV.reloadData()
     }
 
+    func swipe(sender: UISwipeGestureRecognizer){
+        print("swipe")
+        let cell =  sender.view as! ItemCVCell
+        let indexPath = collectionView?.indexPath(for: cell)
+        
+        seleccionado.remove(at: (indexPath?.row)!)
+        cV.reloadData()
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*

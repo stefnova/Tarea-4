@@ -74,6 +74,7 @@ class Items_TVController: UITableViewController {
         let item = items[(indexPath?.row)!]
         
         if !seleccionado.contains(item) {
+            
             let alerta = UIAlertController(title: "Mensaje", message: "¡Favorito agregado!",preferredStyle: UIAlertControllerStyle.alert)
             let accionOK = UIAlertAction(title: "OK", style: UIAlertActionStyle .default, handler: nil)
             
@@ -82,6 +83,7 @@ class Items_TVController: UITableViewController {
             
             seleccionado.append(item)
         }
+        
         
     }
     
